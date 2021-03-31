@@ -54,7 +54,7 @@
         // 判断图片大小是否合法
         if (file.size / 1024 > this.size) {
           e.target.value = ''
-          return this.$message.error(`文件大小不能超过${this.size}KB`)
+          return this.$message.error(`文件大小不能超过${this.size >= 1024 ? this.size / 1024 + 'M': this.size + 'KB'}`)
         }
         const fileReader = new FileReader()
         fileReader.onload = function () {

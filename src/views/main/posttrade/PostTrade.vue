@@ -31,20 +31,23 @@
         <el-form-item label="商品图片"
                       prop="img">
           <UploadFile @upload="upload($event, 'img')"
-                      :img-src="ruleForm.img">
+                      :img-src="ruleForm.img"
+                      :size="5 * 1024">
           </UploadFile>
         </el-form-item>
         <el-form-item label="详情图片"
                       prop="detailImg">
           <UploadFile @upload="upload($event, 'detailImg')"
-                      :img-src="ruleForm.detailImg">
+                      :img-src="ruleForm.detailImg"
+                      :size="5 * 1024">
           </UploadFile>
         </el-form-item>
         <el-form-item label="商品状态"
                       prop="status">
           <el-radio-group v-model="ruleForm.status">
             <el-radio label="上架"></el-radio>
-            <el-radio label="下架"></el-radio>
+            <el-radio label="下架"
+                      v-if="pid"></el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="商品描述"
@@ -227,7 +230,7 @@
           if (res.data.status == 1060) {
             this.$message({
               message: res.data.msg,
-              type: 'success',
+              type: 'success'
             })
             this.$router.push({
               name: 'Products'
@@ -277,7 +280,7 @@
           if (res.data.status == 1100) {
             this.$message({
               message: res.data.msg,
-              type: 'success',
+              type: 'success'
             })
             this.$router.push({
               name: 'Products'
