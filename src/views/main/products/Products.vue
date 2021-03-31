@@ -53,7 +53,6 @@
                          width="60"
                          align="center">
         </el-table-column>
-
         <el-table-column prop="img"
                          label="图片"
                          width="80"
@@ -66,7 +65,6 @@
             </div>
           </template>
         </el-table-column>
-
         <el-table-column prop="name"
                          label="名称"
                          width="180">
@@ -102,7 +100,7 @@
                        @click="updownSelf(scope.row, '下架')">下架</el-button>
             <el-button type="danger"
                        size="mini"
-                       @click="removeProduct(scope.row.pid)">删除</el-button>
+                       @click="removeProduct(scope.row.pid, scope.$index)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -299,7 +297,7 @@
        * @description 删除商品
        * @param {string} pid 商品id
        */
-      removeProduct(pid) {
+      removeProduct(pid, index) {
         this.remove({
           pid
         }).then(res => {
@@ -309,7 +307,11 @@
             })
           }
           if (res.data.status == 1110) {
-            location.reload()
+            this.$message({
+              message: res.data.msg,
+              type: 'success'
+            })
+            this.tableData.splice(index, 1)
           } else {
             this.$message.error(res.data.msg)
           }
